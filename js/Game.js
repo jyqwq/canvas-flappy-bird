@@ -16,9 +16,10 @@
             //游戏速度
             this.lspeed = 0.8;
             //生成管子频率
-            this.pNum = 240;
+            this.pNum = 300;
             //管子数组
             this.pipeArr =[];
+            this.gameOver = false;
             //加载所有资源
             this.loadResouce(function () {
                 //开始游戏
@@ -68,31 +69,34 @@
             self.background.rander();
             self.land.rander();
             self.bird.rander();
-            this.timer = setInterval(function () {
+            var mainTimer = setInterval(function () {
                 self.ctx.clearRect(0,0,self.canvas.width,self.canvas.height);
                 //设置帧编号
                 self.f++;
-                //每240帧生成一个管子
+                //间隔self.pNum帧生成一个管子
                 if (self.f % self.pNum === 0){
                     new Pipe(self.lspeed);
                 }
-
                 //更新背景、大地、管道、小鸟
                 self.background.update();
                 self.background.rander();
-                self.bird.update();
-                self.bird.rander();
                 self.land.update();
                 self.land.rander();
                 for (let i = 0; i < self.pipeArr.length ; i++) {
                     self.pipeArr[i].update();
                     self.pipeArr[i].rander();
                 }
+                self.bird.update();
+                self.bird.rander();
                 self.ctx.textAlign = 'left';
                 self.ctx.font = '10px Consolas';
                 //输出帧编号
                 self.ctx.fillText('FNO '+self.f,20,20);
-            },40)
+                if (self.gameOver) {
+                    clearInterval(mainTimer);
+                    location.reload();
+                }
+            },40);
         },
         bindEvent :function () {
             this.canvas.onclick = () =>{this.bird.fly()}

@@ -20,13 +20,22 @@
             var self = this;
             game.ctx.drawImage(this.imageDown,0,320-self.height1,52,self.height1,self.x,0,52,self.height1);
             game.ctx.drawImage(this.imageUp,0,0,52,self.height2,self.x,self.height1+self.interspace,52,self.height2)
+            //测试数据
+            // game.ctx.fillText(self.height1,this.x,100);
+            // game.ctx.fillText(self.height1+self.interspace,this.x,350);
         },
         update : function () {
             var self = this;
             self.x-=this.speed;
+            //检测碰撞
+            if (game.bird.R>this.x && game.bird.L<this.x+52) {
+                if (game.bird.T<this.height1 || game.bird.B>this.height1+this.interspace) {
+                    game.gameOver = true;
+                }
+            }
             //管子退出屏幕时，移出数组
-            if (self.x === -game.canvas.width-52) {
-                game.pipeArr.shift()
+            if (self.x < -game.canvas.width-52) {
+                game.pipeArr.shift();
             }
         }
     })

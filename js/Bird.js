@@ -20,10 +20,15 @@
         },
         rander :function () {
             game.ctx.save();
-            game.ctx.translate(this.x-24,this.y-24);
+            game.ctx.translate(this.x,this.y);
             game.ctx.rotate(this.d);
             game.ctx.drawImage(this.imageArr[this.wingStep],-24,-24);
             game.ctx.restore();
+            //测试数据
+            // game.ctx.fillText(parseInt(this.T),this.x,this.y-12);
+            // game.ctx.fillText(parseInt(this.R),this.x+17,this.y);
+            // game.ctx.fillText(parseInt(this.B),this.x,this.y+12);
+            // game.ctx.fillText(parseInt(this.L),this.x-17,this.y);
         },
         update :function () {
             game.f % 30 ===0 && this.wingStep++;
@@ -36,7 +41,10 @@
                 //下落算法
                 this.y +=this.fno*0.005;
                 //最低点
-                if (this.y>game.canvas.height*0.78)this.y = game.canvas.height*0.78;
+                if (this.y>game.canvas.height*0.78){
+                    this.y = game.canvas.height*0.78;
+                    game.gameOver = true;
+                }
             }else {
                 //上升算法
                 this.y -=(80-this.fno)*0.01;
@@ -55,6 +63,11 @@
             }else {
                 this.d = 0.8;
             }
+            //碰撞体积
+            this.T = this.y-12;
+            this.R = this.x+17;
+            this.B = this.y+12;
+            this.L = this.x-17;
 
         },
         fly :function () {
