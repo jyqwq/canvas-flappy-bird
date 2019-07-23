@@ -1,0 +1,15 @@
+{
+  "bg_night" : "asset/bg_night.png",
+  "land" : "asset/land.png",
+  "pipe_down" : "asset/pipe_down.png",
+  "pipe2_up" : "asset/pipe2_up.png",
+  "bird0_0" : "asset/bird0_0.png",
+  "bird0_1" : "asset/bird0_1.png",
+  "bird0_2" : "asset/bird0_2.png",
+  "bird1_0" : "asset/bird1_0.png",
+  "bird1_1" : "asset/bird1_1.png",
+  "bird1_2" : "asset/bird1_2.png",
+  "bird2_0" : "asset/bird2_0.png",
+  "bird2_1" : "asset/bird2_1.png",
+  "bird2_2" : "asset/bird2_2.png"
+}

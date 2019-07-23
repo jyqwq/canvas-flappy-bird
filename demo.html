@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
+    <title>canvasGame</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        canvas{
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas width="340" height="500" id="mycanvas">请升级你的浏览器！</canvas>
+    <script src="js/underscore-min.js"></script>
+    <script src="js/SimpleJS.js"></script>
+    <script src="js/Game.js"></script>
+    <script src="js/Background.js"></script>
+    <script src="js/Land.js"></script>
+    <script src="js/Pipe.js"></script>
+    <script src="js/Bird.js"></script>
+    <script>
+        var game = new Game("mycanvas");
+    </script>
+</body>
+</html>
