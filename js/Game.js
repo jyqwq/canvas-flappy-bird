@@ -55,7 +55,9 @@
                     }
                 }
             };
+
             xhr.open("get",self.RtextURL,true);
+            xhr.setRequestHeader('Content-Type','jsonp');
             xhr.send(null);
         },
         start : function () {
