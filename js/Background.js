@@ -1,11 +1,10 @@
 (function () {
     //背景类
     var Background = window.Background = Class.extend({
-        init : function (s) {
+        init : function () {
             //自己的背景
             this.image = game.R['bg_night'];
             this.x = 0;
-            this.speed = s;
         },
         rander : function () {
             var self = this;
@@ -14,7 +13,7 @@
         },
         update : function () {
             var self = this;
-            self.x+=(this.speed-0.2);
+            self.x+=(game.lspeed-0.2);
             if (self.x > game.canvas.width) {
                 self.x=0;
             }

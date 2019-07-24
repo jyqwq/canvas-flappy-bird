@@ -13,19 +13,20 @@
             this.R = {};
             //帧编号
             this.f = 0;
+            //游戏刷新频率
+            this.fps = 100;
             //游戏速度
-            this.lspeed = 0.8;
+            this.lspeed = 0.3;
             //生成管子频率
-            this.pNum = 300;
-            //管子数组
-            this.pipeArr =[];
-            this.gameOver = false;
+            this.pNum = 800;
+            //下落参数
+            this.dropNum = 0.002;
+            //上升参数
+            this.upNum = 0.006;
             //加载所有资源
             this.loadResouce(function () {
                 //开始游戏
                 this.start();
-                //点击监听
-                this.bindEvent();
             });
         },
         loadResouce : function (callback) {
@@ -57,51 +58,28 @@
             };
 
             xhr.open("get",self.RtextURL,true);
-            xhr.setRequestHeader('Content-Type','jsonp');
             xhr.send(null);
         },
         start : function () {
             var self = this;
-            //实例化背景
-            self.background = new Background(self.lspeed);
-            //实例化大地
-            self.land = new Land(self.lspeed);
-            //实例化小鸟
-            self.bird = new Bird();
-            self.background.rander();
-            self.land.rander();
-            self.bird.rander();
+            //场景管理器
+            self.sceneManager = new SceneManager();
+
             var mainTimer = setInterval(function () {
                 self.ctx.clearRect(0,0,self.canvas.width,self.canvas.height);
                 //设置帧编号
                 self.f++;
-                //间隔self.pNum帧生成一个管子
-                if (self.f % self.pNum === 0){
-                    new Pipe(self.lspeed);
-                }
-                //更新背景、大地、管道、小鸟
-                self.background.update();
-                self.background.rander();
-                self.land.update();
-                self.land.rander();
-                for (let i = 0; i < self.pipeArr.length ; i++) {
-                    self.pipeArr[i].update();
-                    self.pipeArr[i].rander();
-                }
-                self.bird.update();
-                self.bird.rander();
+
+                //更新场景
+                self.sceneManager.update();
+                self.sceneManager.rander();
+
                 self.ctx.textAlign = 'left';
                 self.ctx.font = '10px Consolas';
                 //输出帧编号
                 self.ctx.fillText('FNO '+self.f,20,20);
-                if (self.gameOver) {
-                    clearInterval(mainTimer);
-                    location.reload();
-                }
-            },40);
-        },
-        bindEvent :function () {
-            this.canvas.onclick = () =>{this.bird.fly()}
+                self.ctx.fillText('场景号 '+self.sceneManager.sceneNum,20,50);
+            },self.fps);
         }
     })
 })();

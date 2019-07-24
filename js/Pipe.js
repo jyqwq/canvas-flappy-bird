@@ -1,8 +1,7 @@
 (function () {
     //管子类
     var Pipe = window.Pipe = Class.extend({
-        init : function (s) {
-            this.speed = s;
+        init : function () {
             this.imageDown = game.R['pipe_down'];
             this.imageUp = game.R['pipe2_up'];
             //管子位置
@@ -11,6 +10,8 @@
             this.height1 = 50 + parseInt(Math.random()*221);
             //间隙
             this.interspace = 120;
+            //是否通过管子
+            this.alreadyPass = false;
             //下管子高度
             this.height2 = game.canvas.height*0.78-this.interspace-this.height1;
 
@@ -26,15 +27,20 @@
         },
         update : function () {
             var self = this;
-            self.x-=this.speed;
+            self.x-=game.lspeed;
             //检测碰撞
             if (game.bird.R>this.x && game.bird.L<this.x+52) {
                 if (game.bird.T<this.height1 || game.bird.B>this.height1+this.interspace) {
-                    game.gameOver = true;
+                    game.sceneManager.enter(4);
                 }
             }
+            //加分
+            if (game.bird.R>this.x+52 && !this.alreadyPass){
+                game.scoll++;
+                this.alreadyPass = true;
+            }
             //管子退出屏幕时，移出数组
-            if (self.x < -game.canvas.width-52) {
+            if (self.x < -52) {
                 game.pipeArr.shift();
             }
         }

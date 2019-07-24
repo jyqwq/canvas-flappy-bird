@@ -31,23 +31,18 @@
             // game.ctx.fillText(parseInt(this.L),this.x-17,this.y);
         },
         update :function () {
-            game.f % 30 ===0 && this.wingStep++;
-            //小鸟动画
-            if (this.wingStep>2) {
-                this.wingStep = 0;
-            }
+            this.wind();
             //判断点击
             if (!this.hasEnergy) {
                 //下落算法
-                this.y +=this.fno*0.005;
+                this.y +=this.fno*game.dropNum;
                 //最低点
                 if (this.y>game.canvas.height*0.78){
-                    this.y = game.canvas.height*0.78;
-                    game.gameOver = true;
+                    game.sceneManager.enter(4);
                 }
             }else {
                 //上升算法
-                this.y -=(80-this.fno)*0.01;
+                this.y -=(80-this.fno)*game.upNum;
                 //最高点
                 if (this.y <48) this.y = 48;
                 //恢复下降
@@ -75,6 +70,13 @@
             this.hasEnergy = true;
             this.d = -0.6;
             this.fno = 0;
+        },
+        wind :function () {
+            game.f % 60 ===0 && this.wingStep++;
+            //小鸟动画
+            if (this.wingStep>2) {
+                this.wingStep = 0;
+            }
         }
     })
 })();

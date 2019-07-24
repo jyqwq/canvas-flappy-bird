@@ -1,10 +1,9 @@
 (function () {
     var Land = window.Land = Class.extend({
-        init : function (s) {
+        init : function () {
             //自己的背景
             this.image = game.R['land'];
             this.l = 0;
-            this.speed = s;
         },
         rander : function () {
             var self = this;
@@ -13,7 +12,7 @@
         },
         update : function () {
             var self = this;
-            self.l+=this.speed;
+            self.l+=game.lspeed;
             if (self.l > game.canvas.width) {
                 self.l=0;
             }
