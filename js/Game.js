@@ -41,10 +41,10 @@
                     self.Robj = JSON.parse(xhr.responseText);
                     var imgNum = _.size(self.Robj);
                     for (var k in self.Robj) {
-                        count++;
                         self.R[k] = new Image();
                         self.R[k].src = self.Robj[k];
                         self.R[k].onload = function () {
+                            count++;
                             self.ctx.clearRect(0,0,self.canvas.width,self.canvas.height);
                             self.ctx.textAlign = "center";
                             self.ctx.font = "20px 微软雅黑";

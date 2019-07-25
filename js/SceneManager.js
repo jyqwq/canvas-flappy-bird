@@ -29,7 +29,6 @@
                 game.bird.wind();
             }else if (this.sceneNum === 3) {
                 //间隔self.pNum帧生成一个管子
-                console.log(game.pfno % game.pNum);
                 if (game.pfno % game.pNum === 0) new Pipe();
                 game.background.update();
                 game.land.update();
